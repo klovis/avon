@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Client
@@ -56,11 +57,25 @@ class Client
      */
     private $note;
 
+   /**
+    * @var ArrayCollection
+    *
+    * @ORM\OneToMany(targetEntity="AppBundle\Entity\Order", mappedBy="client")
+    */
+    protected $orders;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->orders = new ArrayCollection();
+    }
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -83,7 +98,7 @@ class Client
     /**
      * Get firstname
      *
-     * @return string 
+     * @return string
      */
     public function getFirstname()
     {
@@ -106,7 +121,7 @@ class Client
     /**
      * Get lastname
      *
-     * @return string 
+     * @return string
      */
     public function getLastname()
     {
@@ -129,7 +144,7 @@ class Client
     /**
      * Get phone
      *
-     * @return string 
+     * @return string
      */
     public function getPhone()
     {
@@ -152,7 +167,7 @@ class Client
     /**
      * Get email
      *
-     * @return string 
+     * @return string
      */
     public function getEmail()
     {
@@ -175,10 +190,48 @@ class Client
     /**
      * Get note
      *
-     * @return string 
+     * @return string
      */
     public function getNote()
     {
         return $this->note;
+    }
+
+    /**
+     * Add order
+     *
+     * @param \AppBundle\Entity\Order $order
+     * @return  Client
+     */
+    public function addOrder(\AppBundle\Entity\Order $order)
+    {
+        $this->orders[] = $order;
+
+        return $this;
+    }
+
+    /**
+     * Remove order
+     *
+     * @param \AppBundle\Entity\Order $order
+     */
+    public function removeOrder(\AppBundle\Entity\Order $order)
+    {
+        $this->orders->removeElement($order);
+    }
+
+    /**
+     * Get customer orders
+     *
+     * @return \Doctrine\Common\Collections|Collection
+     */
+    public function getOrders()
+    {
+        return $this->orders;
+    }
+
+    public function __toString()
+    {
+        return $this->firstname . ' ' . $this->lastname;
     }
 }

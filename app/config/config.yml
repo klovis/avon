@@ -75,3 +75,4 @@ easy_admin:
         - AppBundle\Entity\User
         - AppBundle\Entity\Client
         - AppBundle\Entity\Campaign
+        - AppBundle\Entity\Order
