@@ -84,12 +84,20 @@ easy_admin:
                 title: "Avon clients"
                 max_results: 30
                 fields: ['name', 'phone', 'email']
+            form:
+                fields:
+                    - { property: 'firstName', type: 'text', type_options: { 'required': true }}
+                    - { property: 'lastName', type: 'text', type_options: { 'required': true }}
+                    - 'phone'
+                    - 'email'
+                    - 'note'
         Campaign:
             class: AppBundle\Entity\Campaign
             label: 'Campaigns'
             list:
                 title: "Avon campaigns"
                 max_results: 30
+                fields: ['name', 'orderDate', 'paymentDate', 'invoiceValue', 'profit']
         Order:
             class: AppBundle\Entity\Order
             lavel: 'Orders'

@@ -38,21 +38,21 @@ class Campaign
     /**
      * @var string
      *
-     * @ORM\Column(name="invoice_value", type="decimal")
+     * @ORM\Column(name="invoice_value", type="decimal", nullable=true)
      */
     private $invoiceValue;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="payment_date", type="date")
+     * @ORM\Column(name="payment_date", type="date", nullable=true)
      */
     private $paymentDate;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="profit", type="decimal")
+     * @ORM\Column(name="profit", type="decimal", nullable=true)
      */
     private $profit;
 

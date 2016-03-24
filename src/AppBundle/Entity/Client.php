@@ -39,21 +39,21 @@ class Client
     /**
      * @var string
      *
-     * @ORM\Column(name="phone", type="string", length=100)
+     * @ORM\Column(name="phone", type="string", length=100, nullable=true)
      */
     private $phone;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="email", type="string", length=100)
+     * @ORM\Column(name="email", type="string", length=100, nullable=true)
      */
     private $email;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="note", type="text")
+     * @ORM\Column(name="note", type="text", nullable=true)
      */
     private $note;
 
