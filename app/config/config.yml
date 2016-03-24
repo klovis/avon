@@ -71,8 +71,29 @@ fos_user:
     user_class: AppBundle\Entity\User
 
 easy_admin:
+    site_name: 'AVON administration'
+    formats:
+        date:     'd/m/Y'
+        time:     'H:i'
+        datetime: 'd/m/Y H:i:s'
     entities:
-        - AppBundle\Entity\User
-        - AppBundle\Entity\Client
-        - AppBundle\Entity\Campaign
-        - AppBundle\Entity\Order
+        Client:
+            class: AppBundle\Entity\Client
+            label: 'Clients'
+            list:
+                title: "Avon clients"
+                max_results: 30
+                fields: ['name', 'phone', 'email']
+        Campaign:
+            class: AppBundle\Entity\Campaign
+            label: 'Campaigns'
+            list:
+                title: "Avon campaigns"
+                max_results: 30
+        Order:
+            class: AppBundle\Entity\Order
+            lavel: 'Orders'
+            list:
+                title: 'Campaign orders'
+                max_results: 30
+                fields: ['product', 'code', 'client', 'campaign', 'quantity', 'unitPrice', 'totalPrice']

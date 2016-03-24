@@ -60,7 +60,7 @@ class Campaign
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -83,7 +83,7 @@ class Campaign
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -106,7 +106,7 @@ class Campaign
     /**
      * Get orderDate
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getOrderDate()
     {
@@ -129,7 +129,7 @@ class Campaign
     /**
      * Get invoiceValue
      *
-     * @return string 
+     * @return string
      */
     public function getInvoiceValue()
     {
@@ -152,7 +152,7 @@ class Campaign
     /**
      * Get paymentDate
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getPaymentDate()
     {
@@ -175,10 +175,20 @@ class Campaign
     /**
      * Get profit
      *
-     * @return string 
+     * @return string
      */
     public function getProfit()
     {
         return $this->profit;
+    }
+
+    /**
+     * Define magic function toString
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->getName();
     }
 }

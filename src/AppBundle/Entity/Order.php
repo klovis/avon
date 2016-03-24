@@ -28,6 +28,13 @@ class Order
      */
     private $product;
 
+     /**
+      * @var string
+      *
+      * @ORM\Column(name="code", type="string", length=20)
+      */
+    private $code;
+
     /**
      * @var int
      *
@@ -55,6 +62,13 @@ class Order
      * @var AppBundle\Entity\Client;
      */
     protected $client;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Campaign", inversedBy="campaigns")
+     *
+     * @var AppBundle\Entity\Campaign
+     */
+    protected $campaign;
 
 
     /**
@@ -88,6 +102,29 @@ class Order
     public function getProduct()
     {
         return $this->product;
+    }
+
+    /**
+     * Set code
+     *
+     * @param string $code
+     * @return Order
+     */
+    public function setCode($code)
+    {
+        $this->code= $code;
+
+        return $this;
+    }
+
+    /**
+     * Get code
+     *
+     * @return string
+     */
+    public function getCode()
+    {
+        return $this->code;
     }
 
     /**
@@ -163,7 +200,8 @@ class Order
      * Set client
      *
      * @param \AppBundle\Entity\Client $client
-     * @return Order
+     *
+     * @return Client
      */
     public function setClient(\AppBundle\Entity\Client $client = null)
     {
@@ -182,8 +220,47 @@ class Order
         return $this->client;
     }
 
+    /**
+     * Set campaign
+     *
+     * @param \AppBundle\Entity\Campaign $campaign
+     *
+     * @return Campaign
+     */
+    public function setCampaign(\AppBundle\Entity\Campaign $campaign = null)
+    {
+        $this->campaign = $campaign;
+
+        return $this;
+    }
+
+    /**
+     * Get campaign
+     *
+     * @return \AppBundle\Entity\Campaign
+     */
+    public function getCampaign()
+    {
+        return $this->campaign;
+    }
+
+    /**
+     * Implement toStriing magic function
+     *
+     * @return string
+     */
     public function __toString()
     {
         return $this->getProduct();
+    }
+
+    /**
+     * Compute total price to  pay
+     *
+     * @return double
+     */
+    public function getTotalPrice()
+    {
+        return $this->getUnitPrice() * $this->getQuantity();
     }
 }

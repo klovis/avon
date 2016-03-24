@@ -234,4 +234,14 @@ class Client
     {
         return $this->firstname . ' ' . $this->lastname;
     }
+
+    /**
+     * Function for retrieving full client name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->getLastname() . ' ' . $this->getFirstname();
+    }
 }
