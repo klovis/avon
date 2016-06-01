@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Order
@@ -22,54 +23,30 @@ class Order
     private $id;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="product", type="string", length=255)
-     */
-    private $product;
-
-     /**
-      * @var string
-      *
-      * @ORM\Column(name="code", type="string", length=20)
-      */
-    private $code;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="quantity", type="integer", length=4)
-     */
-    private $quantity;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="unit_price", type="decimal")
-     */
-    private $unitPrice;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="note", type="text", nullable=true)
-     */
-    private $note;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Client", inversedBy="orders")
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Client")
      *
      * @var AppBundle\Entity\Client;
      */
     protected $client;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Campaign", inversedBy="campaigns")
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Campaign")
      *
      * @var AppBundle\Entity\Campaign
      */
     protected $campaign;
 
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\OrderProduct", mappedBy="order")
+     *
+     * @var AppBundle\Entity\OrderProduct
+     */
+    protected $products;
+
+    public function __construct()
+    {
+        $this->products = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -81,120 +58,6 @@ class Order
         return $this->id;
     }
 
-    /**
-     * Set product
-     *
-     * @param string $product
-     * @return Order
-     */
-    public function setProduct($product)
-    {
-        $this->product = $product;
-
-        return $this;
-    }
-
-    /**
-     * Get product
-     *
-     * @return string
-     */
-    public function getProduct()
-    {
-        return $this->product;
-    }
-
-    /**
-     * Set code
-     *
-     * @param string $code
-     * @return Order
-     */
-    public function setCode($code)
-    {
-        $this->code= $code;
-
-        return $this;
-    }
-
-    /**
-     * Get code
-     *
-     * @return string
-     */
-    public function getCode()
-    {
-        return $this->code;
-    }
-
-    /**
-     * Set quantity
-     *
-     * @param integer $quantity
-     * @return Order
-     */
-    public function setQuantity($quantity)
-    {
-        $this->quantity = $quantity;
-
-        return $this;
-    }
-
-    /**
-     * Get quantity
-     *
-     * @return integer
-     */
-    public function getQuantity()
-    {
-        return $this->quantity;
-    }
-
-    /**
-     * Set unitPrice
-     *
-     * @param string $unitPrice
-     * @return Order
-     */
-    public function setUnitPrice($unitPrice)
-    {
-        $this->unitPrice = $unitPrice;
-
-        return $this;
-    }
-
-    /**
-     * Get unitPrice
-     *
-     * @return string
-     */
-    public function getUnitPrice()
-    {
-        return $this->unitPrice;
-    }
-
-    /**
-     * Set note
-     *
-     * @param string $note
-     * @return Order
-     */
-    public function setNote($note)
-    {
-        $this->note = $note;
-
-        return $this;
-    }
-
-    /**
-     * Get note
-     *
-     * @return string
-     */
-    public function getNote()
-    {
-        return $this->note;
-    }
 
     /**
      * Set client
@@ -255,12 +118,35 @@ class Order
     }
 
     /**
-     * Compute total price to  pay
+     * Get the products
      *
-     * @return double
+     * @return ArrayCollection
      */
-    public function getTotalPrice()
+    public function getProducts()
     {
-        return $this->getUnitPrice() * $this->getQuantity();
+        return $this->products;
+    }
+
+    /**
+     * Add products
+     *
+     * @param \AppBundle\Entity\OrderProduct $products
+     * @return Order
+     */
+    public function addProduct(\AppBundle\Entity\OrderProduct $products)
+    {
+        $this->products[] = $products;
+
+        return $this;
+    }
+
+    /**
+     * Remove products
+     *
+     * @param \AppBundle\Entity\OrderProduct $products
+     */
+    public function removeProduct(\AppBundle\Entity\OrderProduct $products)
+    {
+        $this->products->removeElement($products);
     }
 }

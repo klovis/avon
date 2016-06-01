@@ -104,4 +104,4 @@ easy_admin:
             list:
                 title: 'Campaign orders'
                 max_results: 30
-                fields: ['product', 'code', 'client', 'campaign', 'quantity', 'unitPrice', 'totalPrice']
+                fields: ['client', 'campaign', 'totalPrice']
