@@ -37,7 +37,7 @@ class Order
     protected $campaign;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\OrderProduct", mappedBy="order")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\OrderProduct", mappedBy="order", cascade={"persist"})
      *
      * @var AppBundle\Entity\OrderProduct
      */
