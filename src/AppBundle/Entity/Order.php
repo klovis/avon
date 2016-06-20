@@ -150,4 +150,19 @@ class Order
     {
         $this->products->removeElement($product);
     }
+
+    /**
+     * Calculate the total price of an order
+     * @return float
+     */
+    public function getTotalPrice()
+    {
+        $price = 0;
+        foreach ($this->products as $product)
+        {
+            $price += $product->getUnitPrice() * $product->getQuantity();
+        }
+
+        return $price;
+    }
 }
