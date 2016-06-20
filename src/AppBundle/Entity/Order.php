@@ -133,9 +133,10 @@ class Order
      * @param \AppBundle\Entity\OrderProduct $products
      * @return Order
      */
-    public function addProduct(\AppBundle\Entity\OrderProduct $products)
+    public function addProduct(\AppBundle\Entity\OrderProduct $product)
     {
-        $this->products[] = $products;
+        $this->products[] = $product;
+        $product->setOrder($this);
 
         return $this;
     }
@@ -145,8 +146,8 @@ class Order
      *
      * @param \AppBundle\Entity\OrderProduct $products
      */
-    public function removeProduct(\AppBundle\Entity\OrderProduct $products)
+    public function removeProduct(\AppBundle\Entity\OrderProduct $product)
     {
-        $this->products->removeElement($products);
+        $this->products->removeElement($product);
     }
 }
