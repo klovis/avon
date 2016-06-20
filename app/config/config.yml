@@ -105,3 +105,8 @@ easy_admin:
                 title: 'Campaign orders'
                 max_results: 30
                 fields: ['client', 'campaign', 'totalPrice']
+            form:
+                fields:
+                    - 'client'
+                    - 'campaign'
+                    - { property: 'products', type: 'collection', type_options: {'required' : true, entry_type: 'AppBundle\Form\Type\OrderProductType'}}

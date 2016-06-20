@@ -13,7 +13,9 @@ class OrderProductType extends AbstractType
     {
         $builder->add('name');
         $builder->add('code');
+        $builder->add('quantity');
         $builder->add('unitPrice');
+
     }
 
     public function configureOptions(OptionsResolver $resolver)

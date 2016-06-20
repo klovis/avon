@@ -57,12 +57,6 @@ class OrderProduct
      */
     private $quantity;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="note", type="text")
-     */
-    private $note;
 
 
     /**
@@ -189,28 +183,5 @@ class OrderProduct
     public function getQuantity()
     {
         return $this->quantity;
-    }
-
-    /**
-     * Set note
-     *
-     * @param string $note
-     * @return OrderProduct
-     */
-    public function setNote($note)
-    {
-        $this->note = $note;
-
-        return $this;
-    }
-
-    /**
-     * Get note
-     *
-     * @return string
-     */
-    public function getNote()
-    {
-        return $this->note;
     }
 }

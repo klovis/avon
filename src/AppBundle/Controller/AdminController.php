@@ -19,28 +19,4 @@ class AdminController extends EasyAdminController
     {
         return parent::indexAction($request);
     }
-
-    /**
-     * Creates the form used to create an entity.
-     *
-     * @param object $entity
-     * @param array  $entityProperties
-     *
-     * @return Form
-     */
-    protected function createOrderEditForm($entity, array $entityProperties)
-    {
-    	$entity = new Order();
-        $tag1 = new OrderProduct();
-        $tag1->setName('tag1');
-        $tag1->setUnitPrice(200);
-        $entity->getProducts()->add($tag1);
-        $tag2 = new OrderProduct();
-        $tag2->setName('tag2');
-        $tag2->setUnitPrice(400);
-        $entity->getProducts()->add($tag2);
-
-    	return $this->createForm(OrderType::class, $entity);
-    }
-
 }
