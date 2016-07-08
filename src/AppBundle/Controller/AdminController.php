@@ -133,4 +133,38 @@ class AdminController extends EasyAdminController
             'entity' => $entity,
         ));
     }
+
+    /**
+     * The method is used to display order invocie
+     *
+     * @return RedirectResponse|Response
+     */
+    public function viewOrderInvoiceAction()
+    {
+        $id = $this->request->query->get('id');
+        $easyadmin = $this->request->attributes->get('easyadmin');
+        $entity = $easyadmin['item'];
+
+        return $this->render('easy_admin/Order/viewInvoice.html.twig', array(
+            'entity' => $entity
+        ));
+
+    }
+
+    /**
+     * The method is used to display campaign invocie
+     *
+     * @return RedirectResponse|Response
+     */
+    public function viewCampaignInvoiceAction()
+    {
+        $id = $this->request->query->get('id');
+        $easyadmin = $this->request->attributes->get('easyadmin');
+        $entity = $easyadmin['item'];
+
+        return $this->render('easy_admin/Campaign/viewInvoice.html.twig', array(
+            'entity' => $entity
+        ));
+    }
+
 }

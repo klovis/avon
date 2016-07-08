@@ -76,6 +76,10 @@ easy_admin:
         date:     'd/m/Y'
         time:     'H:i'
         datetime: 'd/m/Y H:i:s'
+    design:
+        assets:
+            js:
+                - 'bundles/app/javascript/utils.js'
     entities:
         Client:
             class: AppBundle\Entity\Client
@@ -98,13 +102,22 @@ easy_admin:
                 title: "Avon campaigns"
                 max_results: 30
                 fields: ['name', 'orderDate', 'paymentDate', 'invoiceValue', 'profit']
+                actions:
+                    - { name: 'edit' }
+                    - { name: 'viewCampaignInvoice', css_class:'new-tab'}
+                    - { name: 'delete' }
         Order:
             class: AppBundle\Entity\Order
-            lavel: 'Orders'
+            label: 'Orders'
             list:
                 title: 'Campaign orders'
                 max_results: 30
                 fields: ['client', 'campaign', 'totalPrice']
+                actions :
+                    - { name: 'edit' }
+                    - { name: 'viewOrderInvoice', css_class:'new-tab'}
+                    - { name: 'delete' }
+
             form:
                 fields:
                     - 'client'
