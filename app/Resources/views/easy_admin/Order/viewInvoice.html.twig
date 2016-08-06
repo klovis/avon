@@ -1,1 +1,76 @@
-Test order invoice
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+<style>
+.friend-label {
+    margin-top: 20px;
+}
+
+.friend-name {
+    font-weight: bold;
+}
+
+.invoice-table {
+  width: 100%;
+  border: 1px solid black;
+   border-spacing: 0;
+}
+
+.invoice-table td {
+  border: 1px solid black;
+}
+
+.product-head {
+    width: 77%;
+}
+
+.nb-pieces-head {
+  width: 13%;
+}
+
+.price-head {
+  width: 10%;
+}
+
+.invoice-deadline {
+  margin-top:10px;
+}
+</style>
+{% endblock %}
+
+{% block body%}
+
+<p class="friend-label">Prieten: <span class="friend-name">{{entity.client.firstname}} {{entity.client.lastname}} </span></p>
+
+{% set count = 0 %}
+<table class="invoice-table">
+  <tr>
+    <td class="product-head"> Produs comandat </td>
+    <td class="nb-pieces-head"> Nr. bucati </td>
+    <td class="price-head"> Pret </td>
+  </tr>
+
+  {% for product in entity.products %}
+    <tr>
+      <td> {{count + 1}}. {{product.name}} </td>
+      <td> {{product.quantity}} </td>
+      <td> {{product.unitPrice}} </td>
+    </tr>
+    {% set count = count + 1 %}
+  {% endfor %}
+  <tr> <td> &nbsp;</td><td> &nbsp;</td><td> &nbsp;</td> </tr>
+  {% set max = 5 - count %}
+  {% if max > 0 %}
+   {% for index in 1..max %}
+      <tr> <td> &nbsp;</td><td> &nbsp;</td><td> &nbsp;</td> </tr>
+    {% endfor %}
+  {% endif %}
+  <tr>
+    <td> Total: </td>
+    <td> <span class="friend-name"> {{ entity.getTotalNbPieces() }} </span> </td>
+    <td> <span class="friend-name"> {{ entity.getTotalPrice() }} </span> </td>
+  </tr>
+</table>
+
+<p class="invoice-deadline"> Termen de plata: <span class="friend-name">{{entity.getCampaign().getPaymentDate()|date("d.m.Y") }}</span></p>
+{% endblock %}
