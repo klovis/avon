@@ -7,6 +7,7 @@ use AppBundle\Form\Type\OrderType;
 use AppBundle\Entity\Order;
 use AppBundle\Entity\OrderProduct;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use JavierEguiluz\Bundle\EasyAdminBundle\Controller\AdminController as EasyAdminController;
 use JavierEguiluz\Bundle\EasyAdminBundle\Event\EasyAdminEvents;
@@ -133,4 +134,46 @@ class AdminController extends EasyAdminController
             'entity' => $entity,
         ));
     }
+
+    /**
+     * The method is used to display order invocie
+     *
+     * @return RedirectResponse|Response
+     */
+    public function viewOrderInvoiceAction()
+    {
+        $id = $this->request->query->get('id');
+        $easyadmin = $this->request->attributes->get('easyadmin');
+        $entity = $easyadmin['item'];
+
+        $html = $this->renderView('easy_admin/Order/viewInvoice.html.twig', array(
+            'entity' => $entity
+        ));
+
+        return new Response(
+            $this->get('knp_snappy.pdf')->getOutputFromHtml($html),
+            200,
+            array(
+                'Content-Type'          => 'application/pdf',
+                'Content-Disposition'   => 'attachment; filename="' . $entity->getClient()->getFirstname() . '.pdf"'
+            )
+        );
+    }
+
+    /**
+     * The method is used to display campaign invocie
+     *
+     * @return RedirectResponse|Response
+     */
+    public function viewCampaignInvoiceAction()
+    {
+        $id = $this->request->query->get('id');
+        $easyadmin = $this->request->attributes->get('easyadmin');
+        $entity = $easyadmin['item'];
+
+        return $this->render('easy_admin/Campaign/viewInvoice.html.twig', array(
+            'entity' => $entity
+        ));
+    }
+
 }

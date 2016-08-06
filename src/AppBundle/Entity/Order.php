@@ -165,4 +165,19 @@ class Order
 
         return $price;
     }
+
+   /**
+     * Calculate the total number of products ordered
+     *
+     * @return integer
+     */
+    public function getTotalNbPieces()
+    {
+        $count = 0;
+        foreach ($this->products as $product) {
+            $count += $product->getQuantity();
+        }
+
+        return $count;
+    }
 }

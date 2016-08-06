@@ -1,0 +1,33 @@
+.friend-label {
+    margin-top: 20px;
+}
+
+.friend-name {
+    font-weight: bold;
+}
+
+.invoice-table {
+	width: 100%;
+	border: 1px solid black;
+	 border-spacing: 0;
+}
+
+.invoice-table th, .invoice-table td, .invoice-table tr {
+	border: 1px solid black;
+}
+
+.product-head {
+    width: 77%;
+}
+
+.nb-pieces-head {
+	width: 13%;
+}
+
+.price-head {
+	width: 10%;
+}
+
+.invoice-deadline {
+	margin-top:10px;
+}
